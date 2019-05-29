@@ -1,0 +1,44 @@
+@import './variables.scss';
+html {
+    height: 100%;
+    font-size: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    color:  #333;
+    font-family: $default-font-family;
+    font-size:  14px;
+    line-height: 1.5;
+    &.no-scroll {
+        overflow: hidden;
+    }
+    &::after {
+        content: '';
+        display: block;
+        height: 50px;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+nav {
+    text-align: center;
+    a {
+        margin: 0 5px;
+    }
+}
+
+.header-wrap {
+    padding: 2px 25px;
+    background-color: $color-header;
+}
+
+
+  
