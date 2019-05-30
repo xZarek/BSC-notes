@@ -5,7 +5,7 @@ import { Provider } from "react-redux"
 import { BrowserRouter } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import store from "./store";
-import { App } from "./App.js";
+import App from "./App.js";
 import "./sass/global.scss";
 
 const theme = createMuiTheme({
