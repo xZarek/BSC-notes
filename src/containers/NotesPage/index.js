@@ -147,7 +147,7 @@ class NotesPage extends Component {
                         initialValues={activeTableRow}
                     />
                 </ModalComponent> : null}
-                <ModalComponentConfirmation nameModalForm="confirmDeleteNote" classNameModalForm="modalForm confirmSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].confirmModalName} />
+                <ModalComponentConfirmation afterClose={this.shotDownModal} nameModalForm="confirmDeleteNote" classNameModalForm="modalForm confirmSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].confirmModalName} />
             </div>
         )
     }
