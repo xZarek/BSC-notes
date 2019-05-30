@@ -12,7 +12,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import InfoIcon from "@material-ui/icons/Info";
 import Edit from '@material-ui/icons/Create';
 import { hideConfirmModal, showConfirmModal, showModal } from '../../duck/modal';
-import { Link } from 'react-router-dom';
 import '../../sass/notesPage.scss';
 
 
@@ -49,7 +48,6 @@ class NotesPage extends Component {
     };
     generateBody = () => {
         const { tableData, language } = this.props;
-        console.log('notes', tableData);
         return tableData.map((row) => {
             return <tr key={row.id}>
                 <td>{row.id}</td>
@@ -65,16 +63,13 @@ class NotesPage extends Component {
         const { tableData, initialList } = this.props;
         e.preventDefault();
         let copyTableData = [...tableData];
-        console.log('Delete', row.id);
         this.props.showConfirmModal('confirmDeleteNote', {
             onConfirm: (isConfirmed) => {
                 if (isConfirmed) {
                     agent.Notes.removeNote(row.id).then(
                         () => {
                             const index = copyTableData.findIndex((i) => i.id === row.id);
-                            console.log('delete id', index);
                             copyTableData.splice(index, 1);
-                            console.log('Odstraneny item v poli', copyTableData);
                             initialList(copyTableData);
                         }).catch(err => console.log('chyba při mazání', err));
                 } else {
@@ -91,24 +86,20 @@ class NotesPage extends Component {
         ]).then(
             () => showModal('newNote', null)
         )
-        console.log('Add');
     }
     info = (e, row) => {
         e.preventDefault();
-        console.log('info', row);
         this.changeURL(`/info/${row.id}`);
     }
     edit = (e, row) => {
         const { showModal, getRowData } = this.props;
         e.preventDefault();
-        console.log('e value', e.target.value);
         Promise.all([
             getRowData(row),
             this.setState({ activeModal: true })
         ]).then(
             () => showModal('editNote', null)
         )
-        console.log('Edit');
     }
     shotDownModal = () => {
         this.setState({ activeModal: false });
@@ -116,7 +107,6 @@ class NotesPage extends Component {
     };
     render() {
         const { tableData, activeTableRow, language } = this.props;
-        console.log('activeTableRow initial', activeTableRow);
         return (
             <div className="main-wrapper">
 
@@ -137,8 +127,8 @@ class NotesPage extends Component {
                         {this.generateBody()}
                     </tbody>
                 </table>
-                <button className="add-button" onClick={(e) => this.add(e)} >Přidat poznámku</button>
-                {this.state.activeModal ? <ModalComponent nameModalForm="newNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title="Nová poznámka">
+                <button className="add-button" onClick={(e) => this.add(e)} >{translation.localization[language.loc].btnAddNote}</button>
+                {this.state.activeModal ? <ModalComponent nameModalForm="newNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].modalNewName}>
                     <NoteModal
                         createNew={true}
                         saveToRedux={this.props.initialList}
@@ -148,7 +138,7 @@ class NotesPage extends Component {
                     />
                 </ModalComponent> : null}
 
-                {this.state.activeModal && activeTableRow ? <ModalComponent nameModalForm="editNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title="Editování poznámky">
+                {this.state.activeModal && activeTableRow ? <ModalComponent nameModalForm="editNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].modalEditName}>
                     <NoteModal
                         createNew={false}
                         saveToRedux={this.props.initialList}
@@ -157,7 +147,7 @@ class NotesPage extends Component {
                         initialValues={activeTableRow}
                     />
                 </ModalComponent> : null}
-                <ModalComponentConfirmation nameModalForm="confirmDeleteNote" classNameModalForm="modalForm confirmSize" classNameBackdropForm="backdropForm" title="Opravdu odstranit poznámku?" />
+                <ModalComponentConfirmation nameModalForm="confirmDeleteNote" classNameModalForm="modalForm confirmSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].confirmModalName} />
             </div>
         )
     }

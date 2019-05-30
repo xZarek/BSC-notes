@@ -3,8 +3,16 @@ import Modal from './ModalPortal';
 import { connect } from 'react-redux';
 import { hideConfirmModal } from '../duck/modal';
 import Clear from '@material-ui/icons/Clear';
+import { translation } from "../translate/translater";
 import '../sass/global.scss';
+const mapStateToProps = (state) => ({
+    ...state,
+    ...state.modal
+});
 
+const mapDispatchToProps = (dispatch) => ({
+    hideConfirmModal: (type, props) => dispatch(hideConfirmModal(type, props)),
+});
 class ModalComponentConfirmation extends React.Component {
 
     render() {
@@ -17,7 +25,7 @@ class ModalComponentConfirmation extends React.Component {
             typeConfirm, //jaký modal se otevírá: redux
             nameModalForm, //identifikator tohoto modalu
             afterClose, //potřebuji volat funkci při ukončení modalu křížkem nebo klikem vedle 
-            onConfirm,
+            language
 
 
         } = this.props;
@@ -32,20 +40,20 @@ class ModalComponentConfirmation extends React.Component {
                 <div className={classNameModalForm}>
                     <div className="modal-header">
                         {title ? <h2 className="modal-title">{title}</h2> : null}
-                        <button name="button-close-modal" onClick={() => (hideConfirmModal(), afterClose && afterClose())} className="button-close-modal"><Clear className="icon-button" /></button>
+                        <button name="button-close-modal" onClick={() => { hideConfirmModal(); afterClose() }} className="button-close-modal"><Clear className="icon-button" /></button>
                     </div>
                     {/*this.props.children*/}
                     {this.props.children}
 
 
                     <div className="modal-footer confirm-footer">
-                        <button name="saveButton" className="button button-modal" type="submit" onClick={handleConfirm(true)}>Ano</button>
-                        <button name="discardButton" className="button buttonReset" type="button" onClick={handleConfirm(false)}>Ne</button>
+                        <button name="saveButton" className="button button-modal" type="submit" onClick={handleConfirm(true)}>{translation.localization[language.loc].confirmModalYes}</button>
+                        <button name="discardButton" className="button buttonReset" type="button" onClick={handleConfirm(false)}>{translation.localization[language.loc].confirmModalNo}</button>
 
                     </div>
                 </div>
                 {!this.props.noBackdrop &&
-                    <div onClick={() => (hideConfirmModal(), afterClose && afterClose())} className={classNameBackdropForm} />}
+                    <div onClick={() => { hideConfirmModal(); afterClose() }} className={classNameBackdropForm} />}
             </Modal>
         );
 
@@ -54,6 +62,6 @@ class ModalComponentConfirmation extends React.Component {
 }
 
 
+//export default connect(state => state.modal, { hideConfirmModal })(ModalComponentConfirmation);
 
-
-export default connect(state => state.modal, { hideConfirmModal })(ModalComponentConfirmation);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalComponentConfirmation);

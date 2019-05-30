@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import agent from '../agent';
 import { hideModal } from '../duck/modal';
+import { translation } from "../translate/translater";
 import querystring from "query-string";
 
 
@@ -64,7 +65,7 @@ class NoteModal extends React.Component {
 
     render() {
         const {
-
+            language,
             initialValues,
         } = this.props;
 
@@ -72,22 +73,22 @@ class NoteModal extends React.Component {
 
             <form>
                 <div className="formGroupInputLabel">
-                    <label>Popisek</label>
+                    <label>{translation.localization[language.loc].modalLabel}</label>
                     <div>
                         <input
                             name="title"
                             component="input"
                             defaultValue={initialValues ? initialValues.title : ""}
                             type="text"
-                            placeholder="Popisek"
+                            placeholder={translation.localization[language.loc].modalPlaceholder}
                             ref={node => this.title_ref = node}
                             onFocus={() => this.setState({ valid: true })}
                         />
-                        {((this.state.valid) ? null : <span className="form-error">!<span className="tooltiptext">Vyplňte popisek</span></span>)}
+                        {((this.state.valid) ? null : <span className="form-error">!<span className="tooltiptext">{translation.localization[language.loc].modalValidMsg}</span></span>)}
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <button name="buttonSave" type="button" className="button button-modal" onClick={(e) => this.saveNote(e)}>Uložit</button>
+                    <button name="buttonSave" type="button" className="button button-modal" onClick={(e) => this.saveNote(e)}>{translation.localization[language.loc].modalSave}</button>
 
 
                 </div>

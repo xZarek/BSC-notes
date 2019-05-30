@@ -6,29 +6,20 @@ export const translation = {
             listEdit: "upravit",
             listDelete: "odstranit",
             listInfo: "detail",
-            table: {
-                headerId: "Id poznámky",
-                headerNote: "Poznámka",
-                headerDetail: "Detail poznámky",
-                headerEdit: "Editovat",
-                headerDelete: "Smazat",
-                addNote: "Přidat poznámku"
-            },
-            addModal: {
-                headline: "Přidat poznámku",
-                addButton: "Přidat",
-                cancelButton: "Zrušit"
-            },
-            editModal: {
-                headline: "Upravit poznámku",
-                editButton: "Editovat",
-                cancelButton: "Zrušit"
-            },
-            confirmationDelModal: {
-                headline: "Opravdu chcete smazat poznámku: ",
-                submitButton: "Potvrdit",
-                cancelButton: "Zrušit"
-            }
+            btnAddNote: "přidat poznámku",
+            modalNewName: "Nová poznáka",
+            modalEditName: "Editování poznámky",
+            modalLabel: "Popisek",
+            modalPlaceholder: "popisek",
+            modalSave: "Uložit",
+            modalValidMsg: "Vyplňte popisek",
+            confirmModalName: "Opravdu odstranit poznámku?",
+            confirmModalYes: "Ano",
+            confirmModalNo: "Ne",
+            noteInfoName: "Detail poznámky",
+            noteInfoTitle: "Popisek",
+            noteInfoBack: "Zpět",
+            pageNotFound: "Stránka nenalezena",
         },
         en: {
             headName: "notes",
@@ -36,29 +27,20 @@ export const translation = {
             listEdit: "edit",
             listDelete: "remove",
             listInfo: "info",
-            table: {
-                headerId: "Id poznámky",
-                headerNote: "Poznámka",
-                headerDetail: "Detail poznámky",
-                headerEdit: "Editovat",
-                headerDelete: "Smazat",
-                addNote: "Přidat poznámku"
-            },
-            addModal: {
-                headline: "Přidat poznámku",
-                addButton: "Přidat",
-                cancelButton: "Zrušit"
-            },
-            editModal: {
-                headline: "Upravit poznámku",
-                editButton: "Editovat",
-                cancelButton: "Zrušit"
-            },
-            confirmationDelModal: {
-                headline: "Opravdu chcete smazat poznámku: ",
-                submitButton: "Potvrdit",
-                cancelButton: "Zrušit"
-            }
+            btnAddNote: "add note",
+            modalNewName: "New note",
+            modalEditName: "Editing note",
+            modalLabel: "Description",
+            modalPlaceholder: "description",
+            modalSave: "Save",
+            modalValidMsg: "Fill in description",
+            confirmModalName: "Delete note?",
+            confirmModalYes: "Yes",
+            confirmModalNo: "No",
+            noteInfoName: "Detail of note",
+            noteInfoTitle: "Title",
+            noteInfoBack: "Back",
+            pageNotFound: "Page not found",
         }
     }
 }
