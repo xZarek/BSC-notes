@@ -36,15 +36,12 @@ const styles = theme => ({
 });
 
 class App extends React.Component {
-    componentDidMount() {
-        console.log('translation', translation);
-    }
+
     handleChange = (event) => {
         this.props.selectLocation(event.target.value);
     }
     render() {
         const { classes, language } = this.props;
-        console.log('language', language);
         return (
             <Fragment>
                 <div className="header-wrap">
