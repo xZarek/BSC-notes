@@ -5,7 +5,7 @@ import { Provider } from "react-redux"
 import { BrowserRouter } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import store from "./store";
-import App from "./containers/App";
+import { App } from "./App.js";
 import "./sass/global.scss";
 
 const theme = createMuiTheme({
@@ -25,7 +25,7 @@ const theme = createMuiTheme({
         fontSize: 50,
     }
 });
-
+/*
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
@@ -35,5 +35,16 @@ ReactDOM.render(
         </BrowserRouter>
     </Provider>,
     document.getElementById("root"),
+);*/
+
+const RootApp = () => (
+    <Provider store={store}>
+        <BrowserRouter>
+            <MuiThemeProvider theme={theme}>
+                <App />
+            </MuiThemeProvider>
+        </BrowserRouter>
+    </Provider>
 );
 
+ReactDOM.render(<RootApp />, document.getElementById('root'));

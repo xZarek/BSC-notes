@@ -2,14 +2,14 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { withStyles, Grid, Paper } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { NotFound } from "../Pages";
-import NotesPage from "../NotesPage";
-import SwitcherLocation from "../../components/SwitcherLocation"
-import { selectLanguageLoad } from '../../duck/language';
+import { NotFound } from "./containers/Pages";
+import NotesPage from "./containers/NotesPage";
+import SwitcherLocation from "./components/SwitcherLocation"
+import { selectLanguageLoad } from './duck/language';
 
-import NoteInfo from "../NoteInfo";
-import { translation } from "../../translate/translater";
-import "../../sass/global.scss";
+import NoteInfo from "./containers/NoteInfo";
+import { translation } from "./translate/translater";
+import "./sass/global.scss";
 
 const mapStateToProps = state => ({
     ...state
@@ -35,24 +35,35 @@ const styles = theme => ({
     }
 });
 
-class App extends React.Component {
 
+
+export class App extends React.Component {
+
+    getTranslateProps = () => {
+        return (
+            this.props.language !== undefined
+                ? this.props.language.loc
+                : 'cz'
+        )
+    }
     handleChange = (event) => {
         this.props.selectLocation(event.target.value);
     }
     render() {
         const { classes, language } = this.props;
+        const translater = translation.localization[this.getTranslateProps()] ? translation.localization[this.getTranslateProps()] : [];
+        console.log('language', language);
         return (
             <Fragment>
                 <div className="header-wrap">
-                    <SwitcherLocation value={language.loc} handleChange={this.handleChange} />
-                    <h2>BCS {translation.localization[language.loc].headName}</h2>
+                    <SwitcherLocation value={this.getTranslateProps()} handleChange={this.handleChange} />
+                    <h2>BCS {translater.headName}</h2>
 
 
 
                 </div>
                 <div className="main-container">
-                    <div className={classes.root}>
+                    <div className={classes && classes.root}>
                         <Grid container spacing={8}>
                             <Grid item xs={12}>
 
@@ -77,6 +88,11 @@ class App extends React.Component {
         );
     }
 }
-
+App.defaultProps = {
+    classes: {},
+    language: {},
+};
+//export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));
+//export default App;
 
