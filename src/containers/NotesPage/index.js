@@ -128,7 +128,7 @@ class NotesPage extends Component {
                     </tbody>
                 </table>
                 <button className="add-button" onClick={(e) => this.add(e)} >{translation.localization[language.loc].btnAddNote}</button>
-                {this.state.activeModal ? <ModalComponent nameModalForm="newNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].modalNewName}>
+                {this.state.activeModal ? <ModalComponent afterClose={this.shotDownModal} nameModalForm="newNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].modalNewName}>
                     <NoteModal
                         createNew={true}
                         saveToRedux={this.props.initialList}
@@ -138,7 +138,7 @@ class NotesPage extends Component {
                     />
                 </ModalComponent> : null}
 
-                {this.state.activeModal && activeTableRow ? <ModalComponent nameModalForm="editNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].modalEditName}>
+                {this.state.activeModal && activeTableRow ? <ModalComponent afterClose={this.shotDownModal} nameModalForm="editNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].modalEditName}>
                     <NoteModal
                         createNew={false}
                         saveToRedux={this.props.initialList}

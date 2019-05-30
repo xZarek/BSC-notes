@@ -28,7 +28,7 @@ class ModalComponent extends React.Component {
                     </div> : null}
                     <button
                         name="button-close-modal"
-                        onClick={() => { hideModal(); afterClose() }}
+                        onClick={() => { hideModal(); afterClose(); }}
                         className="button-close-modal">
                         <Clear className="icon-button" />
                     </button>
