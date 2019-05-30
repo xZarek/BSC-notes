@@ -40,5 +40,262 @@ nav {
     background-color: $color-header;
 }
 
+.modal-header,
+.modal-footer {
+    background-color: $color-light-grey;
+    display: inline-block;
+    padding: 15px;
+    position: relative;
+    width: 100%;
+    &.confirm-footer {
+        background-color: inherit;
+    }
+}
 
-  
+.modal-title {
+    position: relative;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin: 0;
+    font-style: normal;
+    font-weight: normal;
+    width: 90%;//calc(~"100% - 25px");
+}
+
+.modalForm {
+    position: fixed; //padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9990;
+    background-color:$color-white;
+    width: 80%;
+    max-width: 650px;
+    max-height: 90%;
+    overflow-y: auto;
+    border-radius: 4px;
+    &.bigSize {
+        max-width: 1240px;
+    }
+    &.middleSize {
+        max-width: 920px;
+    }
+    &.smallSize {
+        max-width: 650px;
+    }
+    &.confirmSize {
+        max-width: 400px;
+        z-index: 9992; // background-color: @color-light-grey;
+        border: 1px solid #c5c5c5;
+        -webkit-box-shadow: 5px 6px 5px -2px rgba(0, 0, 0, 0.17);
+        -moz-box-shadow: 5px 6px 5px -2px rgba(0, 0, 0, 0.17);
+        box-shadow: 5px 6px 5px -2px rgba(0, 0, 0, 0.17);
+    }
+}
+
+.backdropForm {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 9989;
+    background-color: $color-black;
+    opacity: 0.8;
+    &.confirm-background {
+        z-index: 9991;
+    }
+}
+.button-close-modal {
+    border: none;
+    position: absolute;
+    right: 20px;
+    padding: 3px;
+    text-decoration: none;
+    top: 23px;
+    font-size: 20px;
+    margin: 0;
+    line-height: 1;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.modal-content, .modal-footer {
+    .button {
+        float: right;
+
+        &.buttonReset {
+            float: left;
+        }
+    }
+}
+
+.formGroupInputLabel {
+    display: flex;
+    flex-flow: row nowrap; //justify-content: center;
+    margin: 10px 5px;
+    position: relative;
+    &>label {
+        font-weight: bold;
+        margin-right: 10px;
+        min-width: 150px;
+        text-align: right;
+        padding: 6px 9px; //width: 20%;
+        width: 200px;
+    }
+    &>span {
+        font-weight: bold;
+        margin-right: 4px;
+        min-width: 150px;
+        text-align: left;
+        padding: 6px 9px; //width: 20%;
+        width: 200px;
+    }
+
+    .labelInMidlle {
+        min-width: 150px;
+        text-align: right;
+        padding: 6px 9px;
+    }
+    &>label+div {
+        flex: 1;
+        max-width: 500px;
+        display: flex;
+        flex-flow: column nowrap;
+        position: relative; //margin-bottom: 24px;
+        &>input[type=text],
+        &>input[type=email],
+        &>input[type=tel],
+        &>input[type=date],
+        &>input[type=number],
+        &>input[type=password],
+        &>textarea,
+        &>select,
+        &>label {
+            flex: 1;
+            font-size: $default-font-size;
+            padding: 8px;
+            border: 1px solid $color-border-grey;
+            border-radius: 4px;
+            padding-right: 10px;
+            min-width: 0px;
+            &.input-error {
+                border: 1px solid $color-red;
+            }
+        }
+        &>label {
+            border: none;
+            padding-left: 0;
+        }
+        &.short {
+            max-width: 120px;
+        }
+        &.div {
+            padding-top: 6px;
+        }
+    
+}
+
+.button-modal {
+    background-color: $color-dark-blue;
+    border: 1px solid $color-dark-blue;
+    color: $color-white;
+
+    &:hover,
+    &:focus {
+        background-color: $color-dark-blue-hover;
+        border: 1px solid $color-dark-blue-hover;
+    }
+}
+}
+.form-error {
+    color: $color-red;
+    position: absolute;
+    right: 3px;
+    top: -1px;
+    font-size: 25px;
+    font-weight: bolder;
+    z-index: 3;
+    .radio {
+        right: -30px;
+        top: 15px;
+        font-size: 25px;
+        font-weight: bolder;
+        color: $color-red;
+        position: absolute;
+    }
+    .tooltiptext {
+        visibility: hidden;
+        width: 200px;
+        font-size: $default-font-size;
+        background-color: $color-black;
+        color: $color-white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        transform: translate(0, -50%);
+        top: 50%;
+        right: 130%;
+        &:after {
+            content: "";
+            position: absolute;
+            transform: translate(0, -50%);
+            top: 36%;
+            right: -10px;
+            transform: rotate(270deg);
+            border-width: 5px;
+            border-style: solid;
+            border-color: $color-black transparent transparent transparent;
+        }
+    }
+    &:hover {
+        .tooltipTextRight,
+        .tooltiptext {
+            visibility: visible;
+        }
+    }
+    .tooltipTextRight {
+        visibility: hidden;
+        display: inline;
+        max-width: 240px;
+        min-width: 155px;
+        font-size: $default-font-size;
+        background-color: $color-black;
+        color: $color-white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        transform: translate(0, -50%);
+        top: 50%;
+        left: 150%;
+        &::after {
+            content: "";
+            position: absolute;
+            transform: translate(0, -50%);
+            top: 36%;
+            left: -9px;
+            transform: rotate(90deg);
+            border-width: 5px;
+            border-style: solid;
+            border-color:$color-black transparent transparent transparent;
+        }
+    }
+}
+.select-switcher {
+    border-radius: $radius;
+    margin: 10px;
+    position: absolute;
+    right: 0;
+}
+.select-switcher:focus {
+    border-radius: $radius;
+}
+select:focus {
+    border-radius: $radius;
+    outline:none;
+}

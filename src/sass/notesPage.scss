@@ -1,15 +1,40 @@
 @import './variables.scss';
 .table-main {
-    background-color: green;
     width: 50%;
     height: auto;
-    tr {
-       // padding: 5px;
-        background-color: yellow;
+    margin: 10px 0px 0px 10px;
+    border: 0px transparent;
+    border-spacing: 0px 10px;
+    border-radius: $radius;
+
+    th {
+        padding: 10px 15px;
+        border-radius: $radius;
     }
     td {
         padding: 5px;
-        background-color: blue;
         text-align: center;
+
+        
     }
+    tbody {
+        tr:nth-child(1n) {
+            background-color: $color-light-grey;
+        }
+    }
+}
+.icon-button {
+    cursor: pointer;
+    font-size: 20px !important
+    
+}
+.add-button {
+        margin: 15px 0px 0px 10px;
+        width: 110px;
+        height: 40px;
+        border-radius: $radius;
+        }
+
+.main-wrapper {
+    display:flex;
 }

@@ -23,9 +23,9 @@ const handleErrors = err => {
 };
 
 const requests = {
-    delete: (url, body) =>
+    del: (url, body) =>
         superagent
-            .delete(`${API_ROOT}${url}`)
+            .del(`${API_ROOT}${url}`)
             .send(`${body}`)
             .end(handleErrors)
             .then(responseBody),
@@ -62,7 +62,7 @@ const Notes = {
      * Delete note
      * @param noteId : id of specific note
      */
-    removeNote: (noteId) => requests.delete(`${NOTES}/${noteId}`),
+    removeNote: (noteId) => requests.del(`${NOTES}/${noteId}`),
 
     /**
      * Gains notes

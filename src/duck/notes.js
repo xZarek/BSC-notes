@@ -1,5 +1,7 @@
 // ----- ACTION -----
 export const INITIAL_DATA = "INITIAL_DATA";
+export const ACTIVE_ROW_DATA = 'ACTIVE_ROW_DATA';
+export const INFO_NOTE = 'INFO_NOTE';
 
 // ----- ACTION CREATORS -----
 export const initialDataLoad = data => {
@@ -10,6 +12,24 @@ export const initialDataLoad = data => {
         });
     };
 };
+export const getActiveRowData = (data) => {
+    return dispatch => {
+        dispatch({
+            type: ACTIVE_ROW_DATA,
+            data
+        });
+    };
+};
+
+export const infoNoteLoad = (data) => {
+    return dispatch => {
+        dispatch({
+            type: INFO_NOTE,
+            data
+        });
+    };
+};
+
 
 // ----- REDUCER -----
 const initialState = {
@@ -23,6 +43,16 @@ export default function notes(state = initialState, action) {
                 ...state,
                 initialNotes: action.data
             };
+        case INFO_NOTE:
+            return {
+                ...state,
+                infoNote: action.data
+            };
+        case ACTIVE_ROW_DATA:
+            return {
+                ...state,
+                activeRowData: action.data,
+            }
         default:
             return state;
     }
