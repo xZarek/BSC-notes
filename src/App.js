@@ -6,7 +6,6 @@ import { NotFound } from "./containers/Pages";
 import NotesPage from "./containers/NotesPage";
 import SwitcherLocation from "./components/SwitcherLocation"
 import { selectLanguageLoad } from './duck/language';
-
 import NoteInfo from "./containers/NoteInfo";
 import { translation } from "./translate/translater";
 import "./sass/global.scss";
@@ -52,7 +51,6 @@ export class App extends React.Component {
     render() {
         const { classes, language } = this.props;
         const translater = translation.localization[this.getTranslateProps()] ? translation.localization[this.getTranslateProps()] : [];
-        console.log('language', language);
         return (
             <Fragment>
                 <div className="header-wrap">

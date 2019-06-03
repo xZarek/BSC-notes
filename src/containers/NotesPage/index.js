@@ -7,6 +7,7 @@ import {
     ModalComponentConfirmation,
     NoteModal
 } from '../../components';
+import { Spinner } from 'react-activity';
 import { translation } from "../../translate/translater";
 import DeleteIcon from "@material-ui/icons/Delete";
 import InfoIcon from "@material-ui/icons/Info";
@@ -28,20 +29,23 @@ const mapDispatchToProps = (dispatch) => ({
     hideConfirmModal: (type, props) => dispatch(hideConfirmModal(type, props)),
     getRowData: data => dispatch(getActiveRowData(data)),
 });
+
 class NotesPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             activeModal: false,
+            loaded: false,
         };
     };
     componentDidMount() {
         agent.Notes.getNotes().then(
             (res) => {
-                console.log('response', res);
                 this.props.initialList(res);
             }
         )
+            .catch(err => console.log('chyba při inicializaci', err))
+            .finally(() => this.setState({ loaded: true }));
     }
     changeURL = url => {
         this.props.history.push(url);
@@ -56,6 +60,7 @@ class NotesPage extends Component {
                 <td title={translation.localization[language.loc].listDelete}><DeleteIcon className="icon-button" onClick={(e) => this.delete(e, row)} /></td>
                 <td title={translation.localization[language.loc].listInfo}><InfoIcon className="icon-button" onClick={(e) => this.info(e, row)} /></td>
             </tr>
+
         })
 
     }
@@ -71,7 +76,9 @@ class NotesPage extends Component {
                             const index = copyTableData.findIndex((i) => i.id === row.id);
                             copyTableData.splice(index, 1);
                             initialList(copyTableData);
-                        }).catch(err => console.log('chyba při mazání', err));
+                        }).catch(err => console.log('chyba při mazání', err))
+
+
                 } else {
                     this.props.hideConfirmModal();
                 }
@@ -107,12 +114,12 @@ class NotesPage extends Component {
     };
     render() {
         const { tableData, activeTableRow, language } = this.props;
+        if (!this.state.loaded) {
+            return (<div className="loadingScreenSecond"> <span className="loadingSpinner">
+                <Spinner color="#333333" size={75} speed={1} /></span></div>)
+        };
         return (
             <div className="main-wrapper">
-
-
-
-
                 <table className="table-main">
                     <thead>
                         <tr>
@@ -128,27 +135,31 @@ class NotesPage extends Component {
                     </tbody>
                 </table>
                 <button className="add-button" onClick={(e) => this.add(e)} >{translation.localization[language.loc].btnAddNote}</button>
-                {this.state.activeModal ? <ModalComponent afterClose={this.shotDownModal} nameModalForm="newNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].modalNewName}>
-                    <NoteModal
-                        createNew={true}
-                        saveToRedux={this.props.initialList}
-                        shotDownModal={this.shotDownModal}
-                        tableData={tableData}
+                {
+                    this.state.activeModal ? <ModalComponent afterClose={this.shotDownModal} nameModalForm="newNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].modalNewName}>
+                        <NoteModal
+                            createNew={true}
+                            saveToRedux={this.props.initialList}
+                            shotDownModal={this.shotDownModal}
+                            tableData={tableData}
 
-                    />
-                </ModalComponent> : null}
+                        />
+                    </ModalComponent> : null
+                }
 
-                {this.state.activeModal && activeTableRow ? <ModalComponent afterClose={this.shotDownModal} nameModalForm="editNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].modalEditName}>
-                    <NoteModal
-                        createNew={false}
-                        saveToRedux={this.props.initialList}
-                        shotDownModal={this.shotDownModal}
-                        tableData={tableData}
-                        initialValues={activeTableRow}
-                    />
-                </ModalComponent> : null}
+                {
+                    this.state.activeModal && activeTableRow ? <ModalComponent afterClose={this.shotDownModal} nameModalForm="editNote" classNameModalForm="modalForm middleSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].modalEditName}>
+                        <NoteModal
+                            createNew={false}
+                            saveToRedux={this.props.initialList}
+                            shotDownModal={this.shotDownModal}
+                            tableData={tableData}
+                            initialValues={activeTableRow}
+                        />
+                    </ModalComponent> : null
+                }
                 <ModalComponentConfirmation afterClose={this.shotDownModal} nameModalForm="confirmDeleteNote" classNameModalForm="modalForm confirmSize" classNameBackdropForm="backdropForm" title={translation.localization[language.loc].confirmModalName} />
-            </div>
+            </div >
         )
     }
 

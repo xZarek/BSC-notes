@@ -15,6 +15,7 @@
     "babel-preset-react-app": "^9.0.0",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
+    "cross-env": "^5.2.0",
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",
@@ -50,6 +51,7 @@
     "prop-types": "^15.7.2",
     "query-string": "^6.5.0",
     "react": "^16.8.6",
+    "react-activity": "^1.2.2",
     "react-app-polyfill": "^1.0.1",
     "react-dev-utils": "^9.0.1",
     "react-dom": "^16.8.6",
@@ -57,6 +59,7 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-router-redux": "^4.0.8",
+    "react-scripts": "^3.0.1",
     "react-translate": "^7.0.1",
     "redux": "^4.0.1",
     "redux-devtools": "^3.5.0",
@@ -78,7 +81,7 @@
     "workbox-webpack-plugin": "4.2.0"
   },
   "scripts": {
-    "start": "set PORT=9000 && node scripts/start.js",
+    "start": "cross-env PORT=9000 react-scripts start",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
@@ -100,9 +103,6 @@
   "jest": {
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
-    ],
-    "setupFiless": [
-      "react-app-polyfill/jsdom"
     ],
     "setupFiles": [
       "./src/setupTests.js"
@@ -154,7 +154,6 @@
     ]
   },
   "devDependencies": {
-    "babel-jest": "^24.8.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2",
     "enzyme-to-json": "^3.3.5",

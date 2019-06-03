@@ -92,6 +92,24 @@ nav {
         box-shadow: 5px 6px 5px -2px rgba(0, 0, 0, 0.17);
     }
 }
+.loadingSpinner {
+    position: absolute;
+    color: $color-red;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+.loadingScreenSecond {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(246, 246, 246, 0.5);
+    z-index: 9999; //s vysokým indexem se nepřekryje label a inputy
+}
 
 .backdropForm {
     position: fixed;

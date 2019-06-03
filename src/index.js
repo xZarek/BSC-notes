@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import store from "./store";
 import App from "./App.js";
+import './../node_modules/react-activity/dist/react-activity.css';
 import "./sass/global.scss";
 
 const theme = createMuiTheme({
@@ -41,6 +42,7 @@ const RootApp = () => (
     <Provider store={store}>
         <BrowserRouter>
             <MuiThemeProvider theme={theme}>
+
                 <App />
             </MuiThemeProvider>
         </BrowserRouter>
